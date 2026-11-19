@@ -4,9 +4,19 @@
 pub trait Weapon {
     fn ammo_count(&self) -> u32;
     
-    fn fire(&mut self) -> bool;
+    fn fire(&mut self) -> Option<Damage>;
 
+    fn hull_damage(&self) -> u32;
+    fn shield_damage(&self) -> u32;
 }
+
+pub struct Damage {
+
+    pub hull_damage: u32,
+    pub shield_damage: u32,
+}
+
+
 // Weapon types and their structs
 pub struct MachineGun {
     pub ammo: u32,
@@ -32,7 +42,16 @@ impl Weapon for PlasmaCannon {
         todo!()
     }
 
-    fn fire(&mut self) -> bool{
+
+    fn fire(&mut self) -> Option<Damage> {
+        todo!()
+    }
+
+    fn hull_damage(&self) -> u32 {
+        todo!()
+    }
+
+    fn shield_damage(&self) -> u32 {
         todo!()
     }
 }
@@ -41,11 +60,22 @@ impl Weapon for MachineGun {
     fn ammo_count(&self) -> u32 {
         self.ammo
     }
-    fn fire(&mut self) -> bool {
 
+    fn fire(&mut self) -> Option<Damage> {
+        if self.ammo == 0 {
+            return None
+        }
         self.ammo -= 20;
-        true
+        Some(Damage {hull_damage: self.hull_damage, shield_damage: self.shield_damage})
 
+    }
+
+    fn hull_damage(&self) -> u32 {
+        self.hull_damage
+    }
+
+    fn shield_damage(&self) -> u32 {
+        self.shield_damage
     }
 }
 
@@ -54,7 +84,16 @@ impl Weapon for Missiles {
         todo!()
     }
 
-    fn fire(&mut self) -> bool {
+
+    fn fire(&mut self) -> Option<Damage> {
+        todo!()
+    }
+
+    fn hull_damage(&self) -> u32 {
+        todo!()
+    }
+
+    fn shield_damage(&self) -> u32 {
         todo!()
     }
 }
