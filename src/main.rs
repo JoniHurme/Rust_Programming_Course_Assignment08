@@ -1,4 +1,5 @@
 use ship::{EnemyKind};
+use crate::combat::{attack, };
 use crate::ship::{create_enemy_ship};
 use crate::weapons::{Weapon};
 
@@ -19,7 +20,7 @@ fn main() {
 
     let mut ship2 = create_enemy_ship(EnemyKind::Patrol);
     // println!("{}", ship2.name);
-    let ship3 = create_enemy_ship(EnemyKind::HeavyPatrol);
+    let mut ship3 = create_enemy_ship(EnemyKind::HeavyPatrol);
     // print!("{}", ship3.hull_health);
 
 
@@ -28,14 +29,15 @@ fn main() {
     }
 
 
-    println!("{}", ship3.hull_health);
+
+    println!("{} {}", ship3.hull_health, ship3.shields);
 
 
-    let damage = ship2.weapons.get_mut(0).unwrap().fire();
 
-    println!("{}", damage);
+    attack(&mut ship2, &mut ship3);
 
-    println!("{}", ship3.hull_health);
+
+    println!("{} {}", ship3.hull_health, ship3.shields);
 
     if let Some(a) = &ship2.weapons.get(0) {
         println!("{} ammo left", a.ammo_count())
